@@ -60,7 +60,7 @@ class Home extends Component {
 									)
 								})
 							)
-	    				: <Text>No decks available</Text>
+	    				: <Text style={styles.noDecks}>No decks available</Text>
 	    			}
     			</ScrollView>
     		</View>
@@ -93,6 +93,12 @@ const styles = StyleSheet.create({
 	},
 	cardsText: {
 		fontSize: 14,
+	},
+	noDecks: {
+		fontSize: 24,
+		padding: 20,
+		flex: 1,
+		textAlign: 'center',
 	}
 })
 
