@@ -8,7 +8,7 @@ import {
 	ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
-import { receiveDecks, addDeck } from '../actions';
+import { receiveDecks } from '../actions';
 import { fetchDecks } from '../utils/api';
 import { white, black, yellow } from '../utils/colors';
 import { AppLoading } from 'expo';
