@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
 import Home from './components/Home';
 import AddDeck from './components/AddDeck';
+import Deck from './components/Deck';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
@@ -60,6 +61,15 @@ const MainNavigator = StackNavigator({
 	},
 	AddDeck: {
 		screen: AddDeck,
+		navigationOptions: {
+			headerTintColor: white,
+			headerStyle: {
+				backgroundColor: teal
+			}
+		}
+	},
+	Deck: {
+		screen: Deck,
 		navigationOptions: {
 			headerTintColor: white,
 			headerStyle: {

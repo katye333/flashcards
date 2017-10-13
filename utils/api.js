@@ -8,7 +8,7 @@ import {
 
 export function fetchDecks() {
   	return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-    	.then(formatDecks)
+  		.then(formatDecks)
 }
 
 export function submitDeck(title) {

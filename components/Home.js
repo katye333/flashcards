@@ -53,7 +53,7 @@ class Home extends Component {
 											key={deck.title}
 											style={styles.deck}
 											onPress={() =>
-												this.props.navigation.navigate('Deck', { activeDeck: deck })}>
+												this.props.navigation.navigate('Deck', { currentDeck: deck })}>
 											<Text style={styles.deckText}>{deck.title}</Text>
 											<Text style={styles.cardsText}>{numCards} cards</Text>
 										</TouchableOpacity>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 	deck: {
 		flexDirection: 'column',
 		flex: 1,
-		minHeight: 100,
+		minHeight: 150,
 		backgroundColor: white,
 		alignItems: 'center',
 		justifyContent: 'center',
