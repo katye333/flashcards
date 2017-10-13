@@ -7,12 +7,14 @@ import {
 	KeyboardAvoidingView,
 	TouchableOpacity,
 	ScrollView,
-	Platform
+	Platform,
+	Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
 import { white, black, teal } from '../utils/colors';
 import { NavigationActions } from 'react-navigation';
+import SnackBar from 'react-native-snackbar-component';
 
 function SubmitBtn ({ onPress }) {
 	return (
@@ -26,18 +28,24 @@ function SubmitBtn ({ onPress }) {
 
 class AddDeck extends Component {
 	state = {
-		title: ''
+		title: '',
+		showSnackbar: false
 	}
 
 	submit = () => {
 		const title = this.state.title
 
 		this.props.addDeck(title);
-		this.setState({ title: '' });
-		this.toHome();
+		this.setState({
+			title: '',
+			showSnackbar: true
+		});
 	}
 
 	toHome = () => {
+		this.setState({
+			showSnackbar: false
+		});
 		this.props.navigation.dispatch(NavigationActions.back({
 			key: 'AddDeck'
 		}))
@@ -57,6 +65,15 @@ class AddDeck extends Component {
     					onChangeText={input => this.setState({ title: input })} />
     				<SubmitBtn onPress={this.submit} />
 	    		</KeyboardAvoidingView>
+
+	    		<View style={styles.snackBar}>
+    				<SnackBar
+						visible={this.state.showSnackbar}
+						textMessage="Deck Created"
+						actionHandler={this.toHome}
+						actionText="Home"
+						backgroundColor={teal} />
+    			</View>
 	    	</ScrollView>
     	)
   	}
@@ -95,13 +112,16 @@ const styles = StyleSheet.create({
 		borderRadius: 2,
 		alignSelf: 'center',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	submitBtnText: {
 		color: white,
 		fontSize: 20,
 		textAlign: 'center',
 	},
+	snackBar: {
+		marginTop: 160
+	}
 })
 
 function mapStateToProps(decks) {
