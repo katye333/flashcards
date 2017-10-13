@@ -11,10 +11,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
-import { submitDeck } from '../utils/api';
 import { white, black, teal } from '../utils/colors';
 import { NavigationActions } from 'react-navigation';
-const uuid = require('uuid/v4')
 
 function SubmitBtn ({ onPress }) {
 	return (
@@ -28,28 +26,20 @@ function SubmitBtn ({ onPress }) {
 
 class AddDeck extends Component {
 	state = {
-		deck: ''
+		title: ''
 	}
 
 	submit = () => {
-		const key = uuid()
-		const deck = this.state;
+		const title = this.state.title
 
-		// Update Redux Store
-		this.props.dispatch(addDeck(deck, key));
-
-		// Reset local state
-		this.setState(() => ({
-			deck: ''
-		}))
-
-		// Navigate to Home
+		this.props.addDeck(title);
+		this.setState({ title: '' });
 		this.toHome();
-		submitDeck(deck, key);
 	}
+
 	toHome = () => {
 		this.props.navigation.dispatch(NavigationActions.back({
-			key: 'Home'
+			key: 'AddDeck'
 		}))
 	}
 
@@ -63,11 +53,8 @@ class AddDeck extends Component {
     				<TextInput
     					placeholder="Deck Title"
     					style={styles.deckName}
-    					onChange={(value) =>
-    						this.setState(() => ({
-								deckTitle: value
-							})
-						)} />
+    					value={this.state.title}
+    					onChangeText={input => this.setState({ title: input })} />
     				<SubmitBtn onPress={this.submit} />
 	    		</KeyboardAvoidingView>
 	    	</ScrollView>
@@ -123,4 +110,4 @@ function mapStateToProps(decks) {
 	}
 }
 
-export default connect(mapStateToProps)(AddDeck);
+export default connect(mapStateToProps, { addDeck })(AddDeck);

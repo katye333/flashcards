@@ -6,8 +6,13 @@ export function fetchDecks() {
     	.then(formatDecks)
 }
 
-export function submitDeck(deck, key) {
-  	return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
-    	[key]: deck
-  	}))
+export function submitDeck(title) {
+  	return AsyncStorage.mergeItem(
+  		DECKS_STORAGE_KEY,
+  		JSON.stringify({
+    		[title]: {
+    			title: title
+    		}
+  		})
+  	)
 }

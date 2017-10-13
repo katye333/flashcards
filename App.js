@@ -57,6 +57,15 @@ const Tabs = TabNavigator({
 const MainNavigator = StackNavigator({
 	Home: {
 		screen: Tabs,
+	},
+	AddDeck: {
+		screen: AddDeck,
+		navigationOptions: {
+			headerTintColor: white,
+			headerStyle: {
+				backgroundColor: teal
+			}
+		}
 	}
 })
 
