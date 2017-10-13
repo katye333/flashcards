@@ -16,11 +16,10 @@ import _ from 'lodash';
 
 class Home extends Component {
 	state = {
-		ready: false
+		ready: false,
 	}
 	componentDidMount() {
 		const { dispatch } = this.props
-
     	fetchDecks()
     		.then((decks) => dispatch(receiveDecks(decks)))
       		.catch((e) => {
@@ -43,11 +42,12 @@ class Home extends Component {
 
     	return (
     		<View style={styles.container}>
-    			<ScrollView contentContainerStyle={styles.container}>
+    			<ScrollView contentContainerStyle={styles.scrollContainer}>
 	    			{numDecks > 0
 	    				? 	(
 	    						_.map(decks, deck => {
-	    							let numCards = deck.questions.length;
+	    							let numCards = deck.questions ? deck.questions.length : 0
+
 									return (
 										<TouchableOpacity
 											key={deck.title}
@@ -71,13 +71,17 @@ class Home extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 20,
+		backgroundColor: white,
+	},
+	scrollContainer: {
+		paddingLeft: 20,
 		paddingTop: 0,
 		backgroundColor: white,
 	},
 	deck: {
 		flexDirection: 'column',
 		flex: 1,
+		minHeight: 100,
 		backgroundColor: white,
 		alignItems: 'center',
 		justifyContent: 'center',
