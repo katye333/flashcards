@@ -5,20 +5,117 @@ import {
 	StyleSheet,
 	TextInput,
 	KeyboardAvoidingView,
-	TouchableOpacity
+	TouchableOpacity,
+	ScrollView,
+	Platform
 } from 'react-native';
 import { connect } from 'react-redux';
-import { receiveDecks, addDeck } from '../actions';
-import { fetchDecks } from '../utils/api';
-import { white, black, yellow } from '../utils/colors';
+import { addDeck } from '../actions';
+import { submitDeck } from '../utils/api';
+import { white, black, teal } from '../utils/colors';
+import { NavigationActions } from 'react-navigation';
+const uuid = require('uuid/v4')
+
+function SubmitBtn ({ onPress }) {
+	return (
+		<TouchableOpacity
+			style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+			onPress={onPress}>
+			<Text style={styles.submitBtnText}>Submit</Text>
+		</TouchableOpacity>
+	)
+}
 
 class AddDeck extends Component {
+	state = {
+		deck: ''
+	}
+
+	submit = () => {
+		const key = uuid()
+		const deck = this.state;
+
+		// Update Redux Store
+		this.props.dispatch(addDeck(deck, key));
+
+		// Reset local state
+		this.setState(() => ({
+			deck: ''
+		}))
+
+		// Navigate to Home
+		this.toHome();
+		submitDeck(deck, key);
+	}
+	toHome = () => {
+		this.props.navigation.dispatch(NavigationActions.back({
+			key: 'Home'
+		}))
+	}
+
   	render() {
     	return (
-    		<View></View>
+    		<ScrollView
+    			ref='scroll'
+    			style={styles.container}>
+	    		<KeyboardAvoidingView behavior="position">
+    				<Text style={styles.title}>What's the title of your new deck?</Text>
+    				<TextInput
+    					placeholder="Deck Title"
+    					style={styles.deckName}
+    					onChange={(value) =>
+    						this.setState(() => ({
+								deckTitle: value
+							})
+						)} />
+    				<SubmitBtn onPress={this.submit} />
+	    		</KeyboardAvoidingView>
+	    	</ScrollView>
     	)
   	}
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		padding: 20,
+		backgroundColor: white
+	},
+	title: {
+		fontSize: 42,
+		textAlign: 'center',
+		marginBottom: 30,
+	},
+	deckName: {
+		height: 50,
+		padding: 10,
+	    backgroundColor: '#fff',
+	    flex: 1,
+	    marginBottom: 60
+	},
+	iosSubmitBtn: {
+		backgroundColor: teal,
+		padding: 30,
+		borderRadius: 7,
+		height: 45,
+	},
+	androidSubmitBtn: {
+		backgroundColor: teal,
+		padding: 15,
+		paddingLeft: 30,
+		paddingRight: 30,
+		height: 45,
+		borderRadius: 2,
+		alignSelf: 'center',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	submitBtnText: {
+		color: white,
+		fontSize: 20,
+		textAlign: 'center',
+	},
+})
 
 function mapStateToProps(decks) {
 	return {
