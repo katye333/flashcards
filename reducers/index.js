@@ -31,6 +31,17 @@ function decks(state = {}, action) {
 				})
 			}
 
+		case ADD_CARD:
+			const deck = state[action.id];
+
+			return {
+				...state,
+				[action.id]: {
+					...deck,
+					questions: deck.questions.concat(action.card)
+				}
+			}
+
 		default:
 			return state
 	}

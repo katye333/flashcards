@@ -29,12 +29,15 @@ export function receiveCards(id, cards) {
 }
 
 export function addCard(id, question, answer) {
-	console.log(id, question, answer)
+
+	let card = {
+		question,
+		answer
+	}
 	submitCard(id, question, answer)
 	return {
 		type: ADD_CARD,
 		id,
-		question,
-		answer
+		card
 	}
 }

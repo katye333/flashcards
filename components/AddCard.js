@@ -49,9 +49,11 @@ class AddCard extends Component {
 		this.setState({
 			showSnackbar: false
 		});
-		this.props.navigation.dispatch(NavigationActions.back({
-			key: 'AddCard'
-		}))
+		const setParamsAction = NavigationActions.setParams({
+  			params: { title: this.props.title },
+  			key: 'Deck',
+		})
+		this.props.navigation.dispatch(setParamsAction)
 	}
 
   	render() {
