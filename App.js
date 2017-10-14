@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
 import Home from './components/Home';
 import AddDeck from './components/AddDeck';
+import AddCard from './components/AddCard';
 import Deck from './components/Deck';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -76,7 +77,16 @@ const MainNavigator = StackNavigator({
 				backgroundColor: teal
 			}
 		}
-	}
+	},
+	AddCard: {
+		screen: AddCard,
+		navigationOptions: {
+			headerTintColor: white,
+			headerStyle: {
+				backgroundColor: teal
+			}
+		}
+	},
 })
 
 export default class App extends Component {

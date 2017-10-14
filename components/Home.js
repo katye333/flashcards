@@ -5,11 +5,13 @@ import {
 	StyleSheet,
 	Platform,
 	TouchableOpacity,
-	ScrollView
+	ScrollView,
+	AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
 import { receiveDecks } from '../actions';
 import { fetchDecks } from '../utils/api';
+import { DECKS_STORAGE_KEY } from '../utils/helpers';
 import { white, black, yellow } from '../utils/colors';
 import { AppLoading } from 'expo';
 import _ from 'lodash';
@@ -33,6 +35,7 @@ class Home extends Component {
   	render() {
   		const { decks } = this.props;
   		const { ready } = this.state;
+  		console.log(decks)
 
   		const numDecks = Object.keys(decks).length;
 

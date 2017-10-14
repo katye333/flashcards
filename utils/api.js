@@ -16,7 +16,28 @@ export function submitDeck(title) {
   		DECKS_STORAGE_KEY,
   		JSON.stringify({
     		[title]: {
-    			title: title
+    			title: title,
+    			questions: []
+    		}
+  		})
+  	)
+}
+
+export function fetchCards() {
+	return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+  		.then(formatDecks)
+}
+
+export function submitCard(id, question, answer) {
+  	return AsyncStorage.mergeItem(
+  		DECKS_STORAGE_KEY,
+  		JSON.stringify({
+    		[id]: {
+    			title: id,
+    			questions: [{
+    				question: question,
+    				answer: answer
+    			}]
     		}
   		})
   	)

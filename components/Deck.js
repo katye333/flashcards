@@ -8,8 +8,8 @@ import {
 	ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
-import { receiveDecks } from '../actions';
-import { fetchDecks } from '../utils/api';
+import { receiveDecks, receiveCards } from '../actions';
+import { fetchDecks, fetchCards } from '../utils/api';
 import { white, black, yellow } from '../utils/colors';
 import { AppLoading } from 'expo';
 import _ from 'lodash';
@@ -22,16 +22,27 @@ class Deck extends Component {
 			title: `${currentDeck.title}`
 		}
 	}
+	componentDidMount() {
+		const { navigation } = this.props;
+		const deckId = navigation.state.params.currentDeck.title;
+
+		fetchCards()
+			.then((cards) => receiveCards(deckId, cards))
+	}
 
   	render() {
   		const { deck } = this.props;
+  		console.log(this.props.cards)
     	return (
     		<View style={styles.container}>
 				<View style={styles.info}>
 					<Text style={styles.title}>{deck.title}</Text>
 					<Text style={styles.cards}>Cards</Text>
 				</View>
-				<TouchableOpacity style={styles.newCardBtn}>
+				<TouchableOpacity
+					style={styles.newCardBtn}
+					onPress={() =>
+						this.props.navigation.navigate('AddCard', { currentDeck: deck })}>
 					<Text
 						style={styles.newCardText}>
 						Add Card
@@ -98,7 +109,8 @@ function mapStateToProps(state, { navigation }) {
 	const { currentDeck } = navigation.state.params;
 
 	return {
-		deck: state[currentDeck.title]
+		deck: state[currentDeck.title],
+		cards: state[currentDeck.title].questions
 	}
 }
 

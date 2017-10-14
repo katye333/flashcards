@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS, ADD_DECK } from '../actions';
+import { RECEIVE_DECKS, ADD_DECK, RECEIVE_CARDS, ADD_CARD } from '../actions';
 
 function decks(state = {}, action) {
 	switch(action.type) {
@@ -17,8 +17,18 @@ function decks(state = {}, action) {
 			return {
 				...state,
 				[action.title]: {
-					title: action.title
+					title: action.title,
+					questions: []
 				}
+			}
+
+		case RECEIVE_CARDS:
+			return {
+				questions: state.decks.filter((deck) => {
+					if (deck.title === action.id) {
+						return deck.questions
+					}
+				})
 			}
 
 		default:
