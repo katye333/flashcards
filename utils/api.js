@@ -30,23 +30,22 @@ export function fetchCards() {
 }
 
 export function submitCard(id, card) {
-	AsyncStorage.getItem(DECKS_STORAGE_KEY, (err, result) => {
-		let object = _.find(JSON.parse(result), ['title', id])
+	AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    	.then((results) => {
 
-		if (object.title === id) {
-			const newObject = object.questions.concat(card);
-			object.questions.push(newObject)
+      		const data = JSON.parse(results);
+      		let oldQuestions = _.find(data, ['title', id]).questions;
 
-			AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(object));
-		}
-	})
-  	// return AsyncStorage.mergeItem(
-  	// 	DECKS_STORAGE_KEY,
-  	// 	JSON.stringify({
-   //  		[id]: {
-   //  			title: id,
-   //  			questions: deck.questions.concat(action.card)
-   //  		}
-  	// 	})
-  	// )
+      		let questions = [];
+      		questions.push(oldQuestions);
+      		questions.push(card);
+      		data[id].questions = questions;
+
+      		AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data), () => {
+      			AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(data), () => {
+      				AsyncStorage.getItem(DECKS_STORAGE_KEY)
+      					.then(formatDecks)
+      			})
+      		})
+    })
 }

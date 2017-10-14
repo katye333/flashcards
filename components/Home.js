@@ -21,7 +21,7 @@ class Home extends Component {
 		ready: false,
 	}
 	componentDidMount() {
-		// AsyncStorage.removeItem(DECKS_STORAGE_KEY)
+		AsyncStorage.removeItem(DECKS_STORAGE_KEY)
 		const { dispatch } = this.props
     	fetchDecks()
     		.then((decks) => dispatch(receiveDecks(decks)))
