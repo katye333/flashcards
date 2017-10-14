@@ -32,7 +32,7 @@ class Deck extends Component {
 
   	render() {
   		const { deck } = this.props;
-  		console.log(this.props.cards)
+  		// console.log('cards',this.props.cards)
     	return (
     		<View style={styles.container}>
 				<View style={styles.info}>

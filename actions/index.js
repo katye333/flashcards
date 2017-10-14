@@ -34,7 +34,7 @@ export function addCard(id, question, answer) {
 		question,
 		answer
 	}
-	submitCard(id, question, answer)
+	submitCard(id, card)
 	return {
 		type: ADD_CARD,
 		id,

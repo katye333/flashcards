@@ -21,6 +21,7 @@ class Home extends Component {
 		ready: false,
 	}
 	componentDidMount() {
+		// AsyncStorage.removeItem(DECKS_STORAGE_KEY)
 		const { dispatch } = this.props
     	fetchDecks()
     		.then((decks) => dispatch(receiveDecks(decks)))
@@ -35,7 +36,6 @@ class Home extends Component {
   	render() {
   		const { decks } = this.props;
   		const { ready } = this.state;
-  		console.log(decks)
 
   		const numDecks = Object.keys(decks).length;
 
