@@ -4,6 +4,7 @@ export const RECEIVE_DECKS 	= 'RECEIVE_DECKS';
 export const ADD_DECK 		= 'ADD_DECK';
 export const RECEIVE_CARDS 	= 'RECEIVE_CARDS';
 export const ADD_CARD		= 'ADD_CARD';
+export const QUIZ			= 'QUIZ';
 
 export function receiveDecks(decks) {
 	return {
@@ -39,5 +40,13 @@ export function addCard(id, question, answer) {
 		type: ADD_CARD,
 		id,
 		card
+	}
+}
+
+export function receiveCardsForQuiz(id, cards) {
+	return {
+		type: QUIZ,
+		id,
+		cards
 	}
 }

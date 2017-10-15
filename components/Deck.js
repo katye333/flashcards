@@ -49,7 +49,10 @@ class Deck extends Component {
 						Add Card
 					</Text>
 				</TouchableOpacity>
-				<TouchableOpacity style={styles.quizBtn}>
+				<TouchableOpacity
+					style={styles.quizBtn}
+					onPress={() =>
+						this.props.navigation.navigate('Quiz', { currentDeck: deck })}>
 					<Text
 						style={styles.quizText}>
 						Begin Quiz
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
 	newCardBtn: {
 		alignItems: 'center',
 		alignSelf: 'center',
-		width: 200,
+		width: 220,
 		marginTop: 150,
 		borderRadius: Platform.OS === 'ios' ? 10 : 4,
 		borderWidth: 2,
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
 	quizBtn: {
 		alignItems: 'center',
 		alignSelf: 'center',
-		width: 200,
+		width: 220,
 		marginTop: 10,
 		paddingTop: 10,
 		paddingBottom: 10,
