@@ -56,7 +56,7 @@ class AddCard extends Component {
 		this.setState({
 			showSnackbar: false
 		});
-		this.props.navigation.navigate('Deck', { currentDeck: this.props.navigation.state.params.currentDeck })
+		this.props.navigation.dispatch(NavigationActions.back())
 	}
 
   	render() {
