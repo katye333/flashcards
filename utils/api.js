@@ -30,19 +30,17 @@ export function fetchCards() {
 }
 
 export function submitCard(id, card) {
-	return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+	AsyncStorage.getItem(DECKS_STORAGE_KEY)
     	.then((results) => {
 
       		const data = JSON.parse(results);
-      		let oldQuestions = _.find(data, ['title', id]).questions;
+      		let questions = _.find(data, ['title', id]).questions;
 
-      		let questions = [];
-      		questions.push(oldQuestions);
       		questions.push(card);
       		data[id].questions = questions;
 
       		AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data), () => {
-      			AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(data), () => {
+      			return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(data), () => {
       				AsyncStorage.getItem(DECKS_STORAGE_KEY)
       					.then(formatDecks)
       			})
