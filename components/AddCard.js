@@ -56,7 +56,9 @@ class AddCard extends Component {
 		this.setState({
 			showSnackbar: false
 		});
-		this.props.navigation.dispatch(NavigationActions.back())
+		this.props.navigation.dispatch(NavigationActions.back({
+			key: this.props.navigation.state.params.key
+		}))
 	}
 
   	render() {
@@ -64,7 +66,7 @@ class AddCard extends Component {
     		<ScrollView
     			ref='scroll'
     			style={styles.container}>
-	    		<KeyboardAvoidingView behavior="position">
+	    		<KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
     				<TextInput
     					placeholder="Card Question"
     					style={styles.deckName}
@@ -134,7 +136,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	snackBar: {
-		marginTop: 160
+		marginTop: 230
 	}
 })
 
