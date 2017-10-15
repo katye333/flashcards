@@ -30,7 +30,7 @@ export function fetchCards() {
 }
 
 export function submitCard(id, card) {
-	AsyncStorage.getItem(DECKS_STORAGE_KEY)
+	return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     	.then((results) => {
 
       		const data = JSON.parse(results);

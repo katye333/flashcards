@@ -23,6 +23,7 @@ class Deck extends Component {
 		}
 	}
 	componentDidMount() {
+
 		const { navigation } = this.props;
 		const deckId = navigation.state.params.currentDeck.title;
 
@@ -31,13 +32,13 @@ class Deck extends Component {
 	}
 
   	render() {
-  		const { deck } = this.props;
-  		// console.log('cards',this.props.cards)
+  		const { deck, cards } = this.props;
+
     	return (
     		<View style={styles.container}>
 				<View style={styles.info}>
 					<Text style={styles.title}>{deck.title}</Text>
-					<Text style={styles.cards}>Cards</Text>
+					<Text style={styles.cards}>{cards.length} Cards</Text>
 				</View>
 				<TouchableOpacity
 					style={styles.newCardBtn}

@@ -37,7 +37,7 @@ function decks(state = {}, action) {
 			return {
 				...state,
 				[action.id]: {
-					...deck,
+					title: action.id,
 					questions: deck.questions.concat(action.card)
 				}
 			}
