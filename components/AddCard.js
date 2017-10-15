@@ -27,6 +27,13 @@ function SubmitBtn ({ onPress }) {
 }
 
 class AddCard extends Component {
+	static navigationOptions = ({ navigation }) => {
+		const { currentDeck } = navigation.state.params;
+
+		return {
+			title: `${currentDeck.title}`
+		}
+	}
 	state = {
 		question: '',
 		answer: '',
@@ -37,7 +44,7 @@ class AddCard extends Component {
 		const { title } = this.props;
 		const { question, answer } = this.state;
 
-		this.props.addCard(title, question, answer);
+		this.props.addCard(title, question, answer)
 		this.setState({
 			question: '',
 			answer: '',
@@ -49,11 +56,7 @@ class AddCard extends Component {
 		this.setState({
 			showSnackbar: false
 		});
-		const setParamsAction = NavigationActions.setParams({
-  			params: { title: this.props.title },
-  			key: 'Deck',
-		})
-		this.props.navigation.dispatch(setParamsAction)
+		this.props.navigation.navigate('Deck', { currentDeck: this.props.navigation.state.params.currentDeck })
 	}
 
   	render() {
