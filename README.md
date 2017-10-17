@@ -1,7 +1,4 @@
----
----
 # **Flashcards**
----
 ---
 Flashcards is a native application that allows the user to create multiple decks of cards with a question and answer. The user can quiz themselves on the deck and receive a grade on the outcome.
 This project is part of the ReactJS nanodegree offered by Udacity.
@@ -9,7 +6,7 @@ This project is part of the ReactJS nanodegree offered by Udacity.
 This application was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 You can find more information on how to perform common tasks [here](https://github.com/react-community/create-react-native-app/blob/master/README.md).
 
-## What You're Getting
+### What You're Getting
 ```
 +--flashcards/
 	+--actions/
@@ -40,11 +37,11 @@ You can find more information on how to perform common tasks [here](https://gith
 
 ### Features
 ---
-	- Allow users to create a deck which can hold an unlimited number of cards.
-	- Allow users to add a card to a specific deck.
-	- The front of the card displays the question, while the back of the card will have the answer displayed.
-	- Users should be able to quiz themselves on a specific deck and receive a score once they're done.
-	- Users should receive a notification to remind themselves to study if they haven't already for that day.
+ - Allow users to create a deck which can hold an unlimited number of cards.
+ - Allow users to add a card to a specific deck.
+ - The front of the card displays the question, while the back of the card will have the answer displayed.
+ - Users should be able to quiz themselves on a specific deck and receive a score once they're done.
+ - Users should receive a notification to remind themselves to study if they haven't already for that day.
 
 ### Installation
 ---
@@ -63,10 +60,21 @@ $ yarn install
 $ yarn start
 ```
 
-### Authors
+### Contribute
 ---
+Please ensure your pull request adheres to the following guidelines:
+
+- Please do not make duplicate suggestions.
+- Create a new pull request for each suggestion.
+- Start the description with a capital and end with a full stop/period.
+- Check your spelling and grammar.
+- Make sure your text editor is set to remove trailing whitespace.
+
+Thank you for your suggestions!
+
+### Authors
 [Kaitlin Stevens](https://github.com/katye333)
 
+
 ### License
----
 MIT © [Kaitlin Stevens](https://github.com/katye333)
