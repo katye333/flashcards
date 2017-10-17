@@ -42,7 +42,6 @@ class Quiz extends Component {
 			showAnswer: !this.state.showAnswer
 		})
 	}
-
 	onCorrectAnswer() {
 		this.setState({
 			cardNumber: this.state.cardNumber + 1,
@@ -61,9 +60,20 @@ class Quiz extends Component {
 			showAnswer: false
 		})
 	}
+	reset = () => {
+		this.setState({
+			showAnswer: false,
+			cardNumber: 0,
+			correct: 0,
+			incorrect: 0,
+			ready: true
+		})
+	}
+
 	shouldComponentUpdate(nextProps, nextState) {
 		return nextState.showAnswer !== this.props.showAnswer
 	}
+
   	render() {
   		const { shuffledCards } = this.props;
   		const { showAnswer, cardNumber, correct, incorrect, ready } = this.state;
@@ -76,20 +86,43 @@ class Quiz extends Component {
   			let score = (correct / (correct + incorrect)) * 100;
   			return (
   				<View style={styles.scoreContainer}>
+  					<Text style={styles.scoreHeading}>Final Score</Text>
+
   					<View style={styles.scoreRow}>
-	  					<Text style={styles.correctScoreText}>Correct: </Text>
-	  					<Text style={styles.score}>{correct}</Text>
+	  					<Text style={[styles.scoreText, { color: green }]}>Correct: </Text>
+	  					<Text style={styles.scoreText}>{correct}</Text>
 	  				</View>
 
 	  				<View style={styles.scoreRow}>
-  						<Text style={styles.incorrectScoreText}>Incorrect: </Text>
-  						<Text style={styles.score}>{incorrect}</Text>
+  						<Text style={[styles.scoreText, { color: red }]}>Incorrect: </Text>
+  						<Text style={styles.scoreText}>{incorrect}</Text>
   					</View>
 
   					<View style={styles.scoreRow}>
-	  					<Text style={styles.score}>Score: </Text>
-	  					<Text style={styles.score}>{score}</Text>
+	  					<Text style={styles.scoreText}>Score: </Text>
+	  					<Text style={styles.scoreText}>{score.toFixed(2)}</Text>
 	  				</View>
+
+	  				<View>
+		  				<TouchableOpacity
+							style={styles.resetBtn}
+							onPress={() => this.reset()}>
+							<Text
+								style={styles.resetText}>
+								Retake Quiz
+							</Text>
+						</TouchableOpacity>
+
+						<TouchableOpacity
+							style={styles.backHomeBtn}
+							onPress={() =>
+								this.props.navigation.navigate('Home')}>
+							<Text
+								style={styles.backHomeText}>
+								Home
+							</Text>
+						</TouchableOpacity>
+					</View>
   				</View>
   			)
   		}
@@ -163,6 +196,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 36,
+		textAlign: 'center'
 	},
 	answerBtn: {
 		backgroundColor: 'transparent',
@@ -170,14 +204,12 @@ const styles = StyleSheet.create({
 		paddingTop: 15,
 		paddingBottom: 15,
 		width: 220,
-		borderWidth: 2,
-		borderColor: black,
 		alignItems: 'center'
 	},
 	answerBtnText: {
 		fontSize: 16,
 		color: red,
-		fontWeight: '600'
+		fontWeight: '600',
 	},
 	correctBtn: {
 		backgroundColor: green,
@@ -186,11 +218,11 @@ const styles = StyleSheet.create({
 		paddingBottom: 15,
 		width: 220,
 		alignItems: 'center',
-		marginTop: 180
+		marginTop: 120
 	},
 	correctBtnText: {
 		fontSize: 16,
-		color: white
+		color: white,
 	},
 	incorrectBtn: {
 		backgroundColor: red,
@@ -205,26 +237,55 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		color: white
 	},
-	correctScoreText: {
-		color: green,
-		fontSize: 22
+	scoreText: {
+		flex: 1,
+		fontSize: 22,
+		textAlign: 'left',
 	},
-	incorrectScoreText: {
-		color: red,
-		fontSize: 22
-	},
-	score: {
-		color: black,
-		fontSize: 22
+	scoreHeading: {
+		fontSize: 36,
+		marginTop: 40,
+		marginBottom: 40,
+		textAlign: 'center',
 	},
 	scoreContainer: {
 		flex: 1,
 		backgroundColor: white,
-		alignItems: 'center',
 		marginTop: 10,
 	},
 	scoreRow: {
-		flexDirection: 'row'
+		flexDirection: 'row',
+		justifyContent: 'flex-start',
+		marginLeft: 90
+	},
+	resetBtn: {
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: 220,
+		marginTop: 120,
+		borderRadius: Platform.OS === 'ios' ? 10 : 4,
+		borderWidth: 2,
+		borderColor: black,
+		paddingTop: 10,
+		paddingBottom: 10,
+	},
+	resetText: {
+		color: black,
+		fontSize: 22,
+	},
+	backHomeBtn: {
+		alignItems: 'center',
+		alignSelf: 'center',
+		width: 220,
+		marginTop: 10,
+		paddingTop: 10,
+		paddingBottom: 10,
+		borderRadius: Platform.OS === 'ios' ? 10 : 4,
+		backgroundColor: black,
+	},
+	backHomeText: {
+		color: white,
+		fontSize: 22
 	}
 })
 
