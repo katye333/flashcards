@@ -21,7 +21,7 @@ class Home extends Component {
 		ready: false,
 	}
 	componentDidMount() {
-		const { dispatch } = this.props
+		const { dispatch } = this.props;
     	fetchDecks()
     		.then((decks) => dispatch(receiveDecks(decks)))
       		.catch((e) => {

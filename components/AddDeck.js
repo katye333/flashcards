@@ -33,7 +33,7 @@ class AddDeck extends Component {
 	}
 
 	submit = () => {
-		const title = this.state.title
+		const title = this.state.title;
 
 		this.props.addDeck(title);
 		this.setState({
@@ -48,7 +48,7 @@ class AddDeck extends Component {
 		});
 		this.props.navigation.dispatch(NavigationActions.back({
 			key: 'AddDeck'
-		}))
+		}));
 	}
 
   	render() {

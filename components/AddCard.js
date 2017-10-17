@@ -44,7 +44,7 @@ class AddCard extends Component {
 		const { title } = this.props;
 		const { question, answer } = this.state;
 
-		this.props.addCard(title, question, answer)
+		this.props.addCard(title, question, answer);
 		this.setState({
 			question: '',
 			answer: '',
@@ -58,7 +58,7 @@ class AddCard extends Component {
 		});
 		this.props.navigation.dispatch(NavigationActions.back({
 			key: this.props.navigation.state.params.key
-		}))
+		}));
 	}
 
   	render() {
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
 	snackBar: {
 		marginTop: 120
 	}
-})
+});
 
 function mapStateToProps(decks, { navigation }) {
 	const { currentDeck } = navigation.state.params;
