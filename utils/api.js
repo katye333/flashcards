@@ -3,7 +3,6 @@ import {
 	formatDecks,
 	formatCards,
 	DECKS_STORAGE_KEY,
-	CARDS_STORAGE_KEY
 } from './helpers';
 import _ from 'lodash'
 

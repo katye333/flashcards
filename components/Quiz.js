@@ -13,6 +13,7 @@ import { fetchCards } from '../utils/api';
 import { white, black, green, red } from '../utils/colors';
 import { AppLoading } from 'expo';
 import _ from 'lodash';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 class Quiz extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -83,7 +84,10 @@ class Quiz extends Component {
   		}
 
   		if (cardNumber === shuffledCards.length) {
+  			clearLocalNotification().then(setLocalNotification);
+
   			let score = (correct / (correct + incorrect)) * 100;
+
   			return (
   				<View style={styles.scoreContainer}>
   					<Text style={styles.scoreHeading}>Final Score</Text>
