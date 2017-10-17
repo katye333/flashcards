@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	snackBar: {
-		marginTop: 230
+		marginTop: 120
 	}
 })
 
